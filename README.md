@@ -11,7 +11,7 @@ MAX), который будет отвечать на вопросы «Что я
 Для администратора:
 -панель управления для бота
 -просмотр статистики активности пользователей, популярным запросам, частоте использования бота.
--просмотр логов диалогов (с соблюдением анонимности) для анализа качества работы бота
+-просмотр логов диалогов (с соблюдением анонимности) для анализа качества работы бота (сюда входить имя пользователя и id, расстройство, которое мы он выбрал, а также дата первого захода
 -возможность ответов на вопросы пользователя
 -создание и просмотр мероприятий, которые может отправлять бот пользователям
 
@@ -28,15 +28,19 @@ MAX), который будет отвечать на вопросы «Что я
 <img width="70%" height="399" alt="image" src="https://github.com/user-attachments/assets/4ddebbbe-2439-4caa-8f74-e35d3969932f" />
 
 🎨 Визуальный интерфейс сайта для работы администрации
+<p></p>
 Главная Админ-панель:
+<p></p>
 <img width="70%" height="680" alt="image" src="https://github.com/user-attachments/assets/be8b18ae-c192-4af4-9462-22f276680329" />
 
 Админ-панель по решению вопросов:
-<img width="967" height="680" alt="image" src="https://github.com/user-attachments/assets/d1c973ab-0a35-4b8f-8ae0-10aa599d6e5a" />
+<p></p>
+<img width="70%" height="680" alt="image" src="https://github.com/user-attachments/assets/d1c973ab-0a35-4b8f-8ae0-10aa599d6e5a" />
 
 Админ-панель по работе с мероприятиями
-<img width="974" height="680" alt="image" src="https://github.com/user-attachments/assets/d4947b90-3fd5-4885-b3b0-8f3b8dd4fbd2" />
+<p></p>
+<img width="70%" height="680" alt="image" src="https://github.com/user-attachments/assets/d4947b90-3fd5-4885-b3b0-8f3b8dd4fbd2" />
 
 Пример работы бота:
-<img width="591" height="1280" alt="image" src="https://github.com/user-attachments/assets/6b99a9e6-5d01-4993-ad42-f6ad52dbdc78" /><img width="591" height="1280" alt="image" src="https://github.com/user-attachments/assets/4cda68de-b3df-44c9-a8df-44bf6c6a05f5" />
-<img width="591" height="1280" alt="image" src="https://github.com/user-attachments/assets/34874910-90e3-434e-9bf0-07da523b7a8c" /><img width="591" height="1280" alt="image" src="https://github.com/user-attachments/assets/ee255a07-009a-426f-9ee9-3686c4e31894" />
+<img width="25%" height="1280" alt="image" src="https://github.com/user-attachments/assets/6b99a9e6-5d01-4993-ad42-f6ad52dbdc78" /><img width="25%" height="1280" alt="image" src="https://github.com/user-attachments/assets/4cda68de-b3df-44c9-a8df-44bf6c6a05f5" />
+<img width="25%" height="1280" alt="image" src="https://github.com/user-attachments/assets/34874910-90e3-434e-9bf0-07da523b7a8c" /><img width="25%" height="1280" alt="image" src="https://github.com/user-attachments/assets/ee255a07-009a-426f-9ee9-3686c4e31894" />
