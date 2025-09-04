@@ -26,11 +26,11 @@ MAX), который будет отвечать на вопросы «Что я
 
 
 🏗️ Архитектура бота
-<img width="40%" height="680" alt="image" src="https://github.com/user-attachments/assets/83919af3-5787-4d99-99cd-30b036567ea9" />
+<img width="70%" height="399" alt="image" src="https://github.com/user-attachments/assets/4ddebbbe-2439-4caa-8f74-e35d3969932f" />
 
 🎨 Визуальный интерфейс сайта для работы администрации
 Главная Админ-панель:
-<img width="964" height="680" alt="image" src="https://github.com/user-attachments/assets/be8b18ae-c192-4af4-9462-22f276680329" />
+<img width="70%" height="680" alt="image" src="https://github.com/user-attachments/assets/be8b18ae-c192-4af4-9462-22f276680329" />
 
 Админ-панель по решению вопросов:
 <img width="967" height="680" alt="image" src="https://github.com/user-attachments/assets/d1c973ab-0a35-4b8f-8ae0-10aa599d6e5a" />
