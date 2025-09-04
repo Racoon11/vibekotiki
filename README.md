@@ -42,5 +42,6 @@ MAX), который будет отвечать на вопросы «Что я
 <img width="70%" height="680" alt="image" src="https://github.com/user-attachments/assets/d4947b90-3fd5-4885-b3b0-8f3b8dd4fbd2" />
 
 Пример работы бота:
+<p></p>
 <img width="25%" height="1280" alt="image" src="https://github.com/user-attachments/assets/6b99a9e6-5d01-4993-ad42-f6ad52dbdc78" /><img width="25%" height="1280" alt="image" src="https://github.com/user-attachments/assets/4cda68de-b3df-44c9-a8df-44bf6c6a05f5" />
 <img width="25%" height="1280" alt="image" src="https://github.com/user-attachments/assets/34874910-90e3-434e-9bf0-07da523b7a8c" /><img width="25%" height="1280" alt="image" src="https://github.com/user-attachments/assets/ee255a07-009a-426f-9ee9-3686c4e31894" />
