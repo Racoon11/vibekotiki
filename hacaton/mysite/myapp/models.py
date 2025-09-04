@@ -18,6 +18,8 @@ class Article(models.Model):
 class User(models.Model):
     tg = models.IntegerField(verbose_name="Telegram ID")  # Поле для хранения Telegram ID
     Name = models.CharField(max_length=255, verbose_name="Имя")  # Текстовое поле (аналог TEXT)
+    DayAdviceSubscriber = models.BooleanField(default=False)
+    EventsSubscriber = models.BooleanField(default=False)
 
 class UserInfo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_info', verbose_name="Пользователь")
