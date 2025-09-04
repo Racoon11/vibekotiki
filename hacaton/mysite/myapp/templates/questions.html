@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вопросы - Админ панель</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --info-color: #9b59b6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Сайдбар */
+        .sidebar {
+            width: 250px;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-header {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .nav-item {
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-item.active {
+            background-color: var(--primary-color);
+        }
+
+        .nav-item i {
+            margin-right: 10px;
+        }
+
+        /* Основной контент */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        /* Карточки статистики */
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .stat-card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .bg-primary { background-color: var(--primary-color); }
+        .bg-success { background-color: var(--success-color); }
+        .bg-warning { background-color: var(--warning-color); }
+        .bg-accent { background-color: var(--accent-color); }
+        .bg-info { background-color: var(--info-color); }
+
+        .stat-card-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-card-label {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Таблица данных */
+        .data-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th, .data-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .data-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+
+        .data-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid #ddd;
+        }
+
+        .btn-outline:hover {
+            background-color: #f8f9fa;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 0.8rem;
+        }
+
+        .btn-edit {
+            background-color: var(--warning-color);
+            color: white;
+        }
+
+        .btn-delete {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-view {
+            background-color: var(--info-color);
+            color: white;
+        }
+
+        /* Форма фильтрации */
+        .filter-form {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            align-items: flex-end;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .form-control {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            min-width: 200px;
+        }
+
+        /* Статусы вопросов */
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-new {
+            background-color: #ffeaa7;
+            color: #d35400;
+        }
+
+        .status-in-progress {
+            background-color: #81ecec;
+            color: #00b894;
+        }
+
+        .status-resolved {
+            background-color: #55efc4;
+            color: #00b894;
+        }
+
+        .status-closed {
+            background-color: #dfe6e9;
+            color: #636e72;
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+            }
+
+            .stats-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .stats-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-form {
+                flex-direction: column;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Сайдбар -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Админ Панель</h2>
+            </div>
+            <div class="nav-item active">
+                <i>📊</i> <a href="{% url 'home' %}" style="text-decoration: none; color: white;">Дашборд</a>
+            </div>
+            <div class="nav-item">
+                <i>👥</i> Пользователи
+            </div>
+            <div class="nav-item">
+                <i>📦</i> <a href="{% url 'questions' %}" style="text-decoration: none; color: white;">Вопросы</a>
+            </div>
+            <div class="nav-item">
+                <i>📝</i> Ответы
+            </div>
+            <div class="nav-item">
+                <i>📝</i> <a href="{% url 'events' %}" style="text-decoration: none; color: white;">Мероприятия</a>
+            </div>
+        </div>
+
+        <!-- Основной контент -->
+        <div class="main-content">
+            <!-- Шапка -->
+            <div class="header">
+                <h1>Управление вопросами</h1>
+                <div class="user-info">
+                    <div class="user-avatar">A</div>
+                    <span>Администратор</span>
+                </div>
+            </div>
+
+            <!-- Карточки статистики -->
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <h3>Всего вопросов</h3>
+                        <div class="stat-card-icon bg-primary">❓</div>
+                    </div>
+                    <div class="stat-card-value">1,567</div>
+                    <div class="stat-card-label">За все время</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <h3>Новые вопросы</h3>
+                        <div class="stat-card-icon bg-warning">🆕</div>
+                    </div>
+                    <div class="stat-card-value">24</div>
+                    <div class="stat-card-label">За последние 24 часа</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <h3>В работе</h3>
+                        <div class="stat-card-icon bg-info">⚙️</div>
+                    </div>
+                    <div class="stat-card-value">18</div>
+                    <div class="stat-card-label">Требуют ответа</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-card-header">
+                        <h3>Решено</h3>
+                        <div class="stat-card-icon bg-success">✅</div>
+                    </div>
+                    <div class="stat-card-value">1,425</div>
+                    <div class="stat-card-label">Закрытые вопросы</div>
+                </div>
+            </div>
+
+            <!-- Таблица вопросов -->
+            <div class="data-section">
+                <div class="section-header">
+                    <h2 class="section-title">Список вопросов</h2>
+                    <button class="btn btn-primary" onclick="openModal()">Добавить вопрос</button>
+                </div>
+
+                <!-- Форма фильтрации -->
+                <div class="filter-form">
+                    <div class="form-group">
+                        <label for="search">Поиск по вопросу</label>
+                        <input type="text" id="search" class="form-control" placeholder="Введите текст вопроса...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Статус</label>
+                        <select id="status" class="form-control">
+                            <option value="">Все статусы</option>
+                            <option value="new">Новый</option>
+                            <option value="in_progress">В работе</option>
+                            <option value="resolved">Решен</option>
+                            <option value="closed">Закрыт</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Категория</label>
+                        <select id="category" class="form-control">
+                            <option value="">Все категории</option>
+                            <option value="technical">Технические</option>
+                            <option value="general">Общие</option>
+                            <option value="payment">Оплата</option>
+                            <option value="other">Другое</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Дата создания</label>
+                        <input type="date" id="date" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <button class="btn btn-primary">Применить фильтры</button>
+                    </div>
+                </div>
+
+                <!-- Таблица -->
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Вопрос</th>
+                            <th>Пользователь</th>
+                            <th>Категория</th>
+                            <th>Статус</th>
+                            <th>Дата создания</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1567</td>
+                            <td>Как восстановить пароль от аккаунта?</td>
+                            <td>Иван Иванов</td>
+                            <td>Технические</td>
+                            <td><span class="status-badge status-resolved">Решен</span></td>
+                            <td>2024-01-15</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-view">Просмотр</button>
+                                    <button class="btn btn-sm btn-edit">Изменить</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1566</td>
+                            <td>Не приходит письмо подтверждения</td>
+                            <td>Мария Петрова</td>
+                            <td>Технические</td>
+                            <td><span class="status-badge status-in-progress">В работе</span></td>
+                            <td>2024-01-15</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-view">Просмотр</button>
+                                    <button class="btn btn-sm btn-edit">Изменить</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1565</td>
+                            <td>Как изменить тарифный план?</td>
+                            <td>Петр Сидоров</td>
+                            <td>Оплата</td>
+                            <td><span class="status-badge status-new">Новый</span></td>
+                            <td>2024-01-15</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-view">Просмотр</button>
+                                    <button class="btn btn-sm btn-edit">Изменить</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1564</td>
+                            <td>Вопрос о возврате средств</td>
+                            <td>Анна Ковалева</td>
+                            <td>Оплата</td>
+                            <td><span class="status-badge status-closed">Закрыт</span></td>
+                            <td>2024-01-14</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-view">Просмотр</button>
+                                    <button class="btn btn-sm btn-edit">Изменить</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1563</td>
+                            <td>Предложение по улучшению сервиса</td>
+                            <td>Сергей Волков</td>
+                            <td>Общие</td>
+                            <td><span class="status-badge status-resolved">Решен</span></td>
+                            <td>2024-01-14</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn btn-sm btn-view">Просмотр</button>
+                                    <button class="btn btn-sm btn-edit">Изменить</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно добавления вопроса -->
+    <div id="questionModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Добавить новый вопрос</h2>
+            <form id="questionForm">
+                <div class="form-group">
+                    <label for="questionText">Текст вопроса</label>
+                    <textarea id="questionText" class="form-control" rows="3" placeholder="Введите текст вопроса..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="questionCategory">Категория</label>
+                    <select id="questionCategory" class="form-control" required>
+                        <option value="">Выберите категорию</option>
+                        <option value="technical">Технические</option>
+                        <option value="general">Общие</option>
+                        <option value="payment">Оплата</option>
+                        <option value="other">Другое</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="questionUser">Пользователь</label>
+                    <select id="questionUser" class="form-control" required>
+                        <option value="">Выберите пользователя</option>
+                        <option value="1">Иван Иванов</option>
+                        <option value="2">Мария Петрова</option>
+                        <option value="3">Петр Сидоров</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Добавить вопрос</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Модальное окно
+        function openModal() {
+            document.getElementById('questionModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('questionModal').style.display = 'none';
+        }
+
+        // Закрытие модального окна при клике вне его
+        window.onclick = function(event) {
+            const modal = document.getElementById('questionModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Обработка формы
+        document.getElementById('questionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Здесь будет код для отправки данных на сервер
+            alert('Вопрос успешно добавлен!');
+            closeModal();
+        });
+
+        // Обработка кликов по пунктам меню
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
