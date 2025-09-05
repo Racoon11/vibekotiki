@@ -423,17 +423,11 @@
             <div class="sidebar-header">
                 <h2>Админ Панель</h2>
             </div>
-            <div class="nav-item active">
-                <i>📊</i> <a href="{% url 'home' %}" style="text-decoration: none; color: white;">Дашборд</a>
-            </div>
             <div class="nav-item">
-                <i>👥</i> Пользователи
+                <i>👥</i> <a href="{% url 'home' %}" style="text-decoration: none; color: white;">Пользователи</a>
             </div>
             <div class="nav-item">
                 <i>📦</i> <a href="{% url 'questions' %}" style="text-decoration: none; color: white;">Вопросы</a>
-            </div>
-            <div class="nav-item">
-                <i>📝</i> Ответы
             </div>
             <div class="nav-item">
                 <i>📝</i> <a href="{% url 'events' %}" style="text-decoration: none; color: white;">Мероприятия</a>
@@ -509,86 +503,37 @@
 
                 <!-- Сетка мероприятий -->
                 <div class="events-grid">
-                    <!-- Пример мероприятия 1 -->
-                    <div class="event-card">
-                        <div class="event-header">
-                            <h3>Встреча разработчиков</h3>
-                            <div class="event-date">15 октября 2023, 10:00</div>
-                        </div>
-                        <div class="event-body">
-                            <h4 class="event-title">Обсуждение новых проектов</h4>
-                            <p class="event-description">Ежеквартальная встреча разработчиков для обсуждения текущих проектов и планирования новых задач на следующий квартал.</p>
-                            <div class="event-meta">
-                                <div><i class="fas fa-map-marker-alt"></i> Конференц-зал, 3 этаж</div>
-                                <div><i class="fas fa-user"></i> Организатор: Иван Петров</div>
+                    {% for event in events %}
+                        <div class="event-card">
+                            <div class="event-header">
+                                <h3>{{ event.name }}</h3>
+                                <div class="event-date">
+                                    {{ event.event_date|date:"d E Y" }}, {{ event.start_time|time:"H:i" }}
+                                </div>
+                            </div>
+                            <div class="event-body">
+                                <h4 class="event-title">{{ event.description|truncatewords:5 }}</h4>
+                                <p class="event-description">{{ event.description|truncatewords:20 }}</p>
+                                <div class="event-meta">
+                                    <div><i class="fas fa-map-marker-alt"></i> {{ event.location }}</div>
+                                    <div><i class="fas fa-user"></i> Организатор: {{ event.organizer }}</div>
+                                </div>
+                            </div>
+                            <div class="event-footer">
+                                <span class="event-status">Зарегистрировано: {{ event.registered_count|default:0 }}</span>
+                                <div class="event-actions">
+                                    <a href="" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{% url 'delete_event' event.id %}" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <div class="event-footer">
-                            <span class="event-status">Зарегистрировано: 24</span>
-                            <div class="event-actions">
-                                <button class="btn btn-primary btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Пример мероприятия 2 -->
-                    <div class="event-card">
-                        <div class="event-header">
-                            <h3>Тренинг по продажам</h3>
-                            <div class="event-date">20 октября 2023, 14:00</div>
-                        </div>
-                        <div class="event-body">
-                            <h4 class="event-title">Эффективные техники продаж</h4>
-                            <p class="event-description">Практический тренинг для менеджеров по продажам с разбором кейсов и отработкой техник.</p>
-                            <div class="event-meta">
-                                <div><i class="fas fa-map-marker-alt"></i> Переговорная комната 2</div>
-                                <div><i class="fas fa-user"></i> Организатор: Мария Сидорова</div>
-                            </div>
-                        </div>
-                        <div class="event-footer">
-                            <span class="event-status">Зарегистрировано: 18</span>
-                            <div class="event-actions">
-                                <button class="btn btn-primary btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Пример мероприятия 3 -->
-                    <div class="event-card">
-                        <div class="event-header">
-                            <h3>Корпоративное мероприятие</h3>
-                            <div class="event-date">28 октября 2023, 18:00</div>
-                        </div>
-                        <div class="event-body">
-                            <h4 class="event-title">Ежегодная вечеринка</h4>
-                            <p class="event-description">Традиционное ежегодное корпоративное мероприятие для всех сотрудников компании с программой развлечений.</p>
-                            <div class="event-meta">
-                                <div><i class="fas fa-map-marker-alt"></i> Ресторан "Престиж"</div>
-                                <div><i class="fas fa-user"></i> Организатор: Отдел кадров</div>
-                            </div>
-                        </div>
-                        <div class="event-footer">
-                            <span class="event-status">Зарегистрировано: 124</span>
-                            <div class="event-actions">
-                                <button class="btn btn-primary btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    {% empty %}
+                        <p>Нет доступных мероприятий.</p>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -602,42 +547,44 @@
                 <button class="modal-close">&times;</button>
             </div>
             <div class="modal-body">
-                <form id="eventForm">
+                <form id="eventForm" action="{% url 'create_event' %}" method="post">
+                    {% csrf_token %}
+
                     <div class="form-row">
                         <div class="form-group">
                             <label for="eventTitle">Название мероприятия</label>
-                            <input type="text" id="eventTitle" class="form-control" placeholder="Введите название" required>
+                            <input type="text" id="eventTitle" name="name" class="form-control" placeholder="Введите название" required>
                         </div>
                         <div class="form-group">
                             <label for="eventOrganizer">Организатор</label>
-                            <input type="text" id="eventOrganizer" class="form-control" placeholder="ФИО организатора">
+                            <input type="text" id="eventOrganizer" name="organizer" class="form-control" placeholder="ФИО организатора">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="eventDescription">Описание мероприятия</label>
-                        <textarea id="eventDescription" class="form-control" placeholder="Подробное описание мероприятия" required></textarea>
+                        <textarea id="eventDescription" name="description" class="form-control" placeholder="Подробное описание мероприятия" required></textarea>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label for="eventDate">Дата проведения</label>
-                            <input type="date" id="eventDate" class="form-control" required>
+                            <input type="date" id="eventDate" name="event_date" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="eventTime">Время начала</label>
-                            <input type="time" id="eventTime" class="form-control" required>
+                            <input type="time" id="eventTime" name="start_time" class="form-control" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="eventLocation">Место проведения</label>
-                        <input type="text" id="eventLocation" class="form-control" placeholder="Введите место проведения">
+                        <input type="text" id="eventLocation" name="location" class="form-control" placeholder="Введите место проведения">
                     </div>
 
                     <div class="form-group">
                         <label for="eventParticipants">Максимальное количество участников</label>
-                        <input type="number" id="eventParticipants" class="form-control" min="1" value="20">
+                        <input type="number" id="eventParticipants" name="max_participants" class="form-control" min="1" value="20">
                     </div>
 
                     <div class="form-group">
@@ -675,6 +622,7 @@
             });
 
             // Обработка отправки формы
+            /*
             eventForm.addEventListener('submit', function(e) {
                 e.preventDefault();
 
@@ -688,6 +636,7 @@
                 // Очищаем форму
                 eventForm.reset();
             });
+            */
 
             // Установка минимальной даты как сегодняшней
             const today = new Date().toISOString().split('T')[0];

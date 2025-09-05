@@ -1,3 +1,4 @@
 hacaton/.venv
 hacaton/myenv
 hacaton/.idea
+hacaton/mysite/myapp/.env
