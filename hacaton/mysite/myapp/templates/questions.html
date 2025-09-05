@@ -412,7 +412,7 @@
                         <h3>Всего вопросов</h3>
                         <div class="stat-card-icon bg-primary">❓</div>
                     </div>
-                    <div class="stat-card-value">1,567</div>
+                    <div class="stat-card-value">{{ qdata.qall }}</div>
                     <div class="stat-card-label">За все время</div>
                 </div>
 
@@ -421,17 +421,8 @@
                         <h3>Новые вопросы</h3>
                         <div class="stat-card-icon bg-warning">🆕</div>
                     </div>
-                    <div class="stat-card-value">24</div>
-                    <div class="stat-card-label">За последние 24 часа</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-card-header">
-                        <h3>В работе</h3>
-                        <div class="stat-card-icon bg-info">⚙️</div>
-                    </div>
-                    <div class="stat-card-value">18</div>
-                    <div class="stat-card-label">Требуют ответа</div>
+                    <div class="stat-card-value">{{ qdata.qnew }}</div>
+                    <div class="stat-card-label">Треюуют ответа</div>
                 </div>
 
                 <div class="stat-card">
@@ -439,7 +430,7 @@
                         <h3>Решено</h3>
                         <div class="stat-card-icon bg-success">✅</div>
                     </div>
-                    <div class="stat-card-value">1,425</div>
+                    <div class="stat-card-value"> {{ qdata.qsolved }}</div>
                     <div class="stat-card-label">Закрытые вопросы</div>
                 </div>
             </div>

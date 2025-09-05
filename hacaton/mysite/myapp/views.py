@@ -22,11 +22,18 @@ def article_detail(request, article_id):
 def questions(request):
     q = get_all_questions()
     q2 = list_unsolved_questions()
-    return render(request, 'questions.html', {'questions': q, "unsolved_questions": q2})
+    qdata = question_info()
+    return render(request, 'questions.html', {'questions': q, "unsolved_questions": q2, 'qdata': qdata})
 
 def events(request):
     ev = get_all_events()
     return render(request,'events.html',  {'events': ev})
+
+def question_info():
+    data = {"qall": len(Question.objects.all()),
+             'qnew': len(Question.objects.filter(solved=False)),
+             'qsolved': len(Question.objects.filter(solved=True)) }
+    return data
 
 @ensure_csrf_cookie  # Гарантирует, что куки csrftoken будет установлена
 @require_http_methods(["GET"])
