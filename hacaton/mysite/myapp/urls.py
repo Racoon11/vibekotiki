@@ -20,4 +20,5 @@ urlpatterns = [
     path('questions/unsolved/', views.list_unsolved_questions, name='list_unsolved_questions'),
     path('questions/answer', views.answer_question, name='answer_question'),
     path('events/create', views.create_event, name='create_event'),
+    path('events/delete/<int:event_id>/', views.delete_event, name='delete_event'),
 ] 

@@ -438,10 +438,7 @@ def delete_event(request, event_id):
     # if event.organizer != request.user.get_full_name():
     #     return HttpResponseForbidden("У вас нет прав на удаление этого мероприятия.")
 
-    if request.method == 'POST':
-        event_name = event.name
-        event.delete()
-        return redirect('/events')  # Замени на нужный URL, например: 'event_list', 'home', etc.
-
-    # Если GET — можно запретить или перенаправить
-    return HttpResponseForbidden("Удаление разрешено только через POST-запрос.")
+    event_name = event.name
+    print("here")
+    event.delete()
+    return redirect('/events')  
