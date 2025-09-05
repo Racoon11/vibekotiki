@@ -368,10 +368,103 @@
                 ],
                 "combinator": "and"
               }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "e0ac46f0-9504-4555-9d9d-678c7217c694",
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "Хочу подписаться на информирование о мероприятиях",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "2af406d2-87a0-4bbd-9b72-9dabb82756b1",
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "Хочу подписаться на совет дня",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "e174af52-a8ae-4c9f-9efd-64cd1a1b29c9",
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "Обратная связь",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "e2581065-0573-4f4e-9989-ad3c1f86351a",
+                    "leftValue": "={{ $json.message.reply_to_message.text }}",
+                    "rightValue": "можешь задать нам вопрос",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
             }
           ]
         },
-        "options": {}
+        "options": {
+          "fallbackOutput": "extra"
+        }
       },
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
@@ -386,7 +479,7 @@
     {
       "parameters": {
         "promptType": "define",
-        "text": "=Ты психологический помощник, тебе нужно понять, какое может быть расстройство у школьника по его описанию и написать ему советы. Не нужно здороваться, имя школьника -  {{ $json.message.from.first_name }}. По возможности будь краток. Где уместно используй смайлики голубого или синего цветов. Также попробуй классифицировать расстройство. Вот классы: Тревожное расстройство\nДепрессия\nСДВГ\nРПП\nШизофрения\nБиполярное расстройство. Если ты ничего не можешь сказать или посоветовать, выведи сообщение: \"контакты\". Вот сообщение школьника:\n {{ $json.message.text }}\nОтвет сформируй в формате json:\n{\n'response': *ответ школьнику*,\n'class': *твоя классификация, если нельзя определить, напиши \"не определено\"\n}",
+        "text": "=Ты психологический помощник, тебе нужно понять, какое может быть расстройство у школьника по его описанию и написать ему советы. Не нужно здороваться, имя школьника -  {{ $json.message.from.first_name }}. По возможности будь краток. Где уместно используй смайлики голубого или синего цветов. Также попробуй классифицировать расстройство. Вот классы: Тревожное расстройство\nДепрессия\nСДВГ\nРПП\nШизофрения\nБиполярное расстройство. Если ты ничего не можешь сказать или посоветовать, выведи сообщение: \"контакты\".если ты понял, что школьник находится на грани суицида, то напиши совет и отправь ему \"🏥 Детский телефон доверия\n📞 8-800-2000-122 (звонок бесплатный по всей России)\" ну и по возможности постарайся подвести к тому, чтобы он позвонил, ( примернотв том формате, что тебе там помогут)\nВот сообщение школьника:\n {{ $json.message.text }}\nОтвет сформируй в формате json:\n{\n'response': *ответ школьнику*,\n'class': *твоя классификация, если нельзя определить, напиши \"не определено\"\n} ",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -447,7 +540,7 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        1616,
+        1200,
         224
       ],
       "id": "95ecf7cb-8cce-4b0e-8984-6652661df04a",
@@ -525,6 +618,10 @@
                   {
                     "text": "Тревожная кнопка",
                     "additionalFields": {}
+                  },
+                  {
+                    "text": "Обратная связь",
+                    "additionalFields": {}
                   }
                 ]
               }
@@ -538,7 +635,7 @@
       "typeVersion": 1.2,
       "position": [
         960,
-        -272
+        -224
       ],
       "id": "8fb60e97-4e91-40a6-af41-0635b6bb8d2c",
       "name": "Выбор раздела",
@@ -714,8 +811,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        384,
-        608
+        848,
+        464
       ],
       "id": "89849f8b-32aa-4463-9b56-c115ef6ad3fd",
       "name": "Ответ на выбор из вариантов",
@@ -752,8 +849,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        368,
-        400
+        432,
+        352
       ],
       "id": "b42c2d32-d2b2-438c-b479-c76809be9fd0",
       "name": "Ответ на экстренную кнопку",
@@ -796,8 +893,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        384,
-        784
+        288,
+        624
       ],
       "id": "c875084f-8953-4d90-8b7e-ea32c702a6af",
       "name": "Тревожное",
@@ -812,14 +909,14 @@
     {
       "parameters": {
         "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
-        "text": "=😞 Депрессия  \n\nЧто это? \nНе просто «грусть». Это когда всё кажется серым, пустым, бессмысленным. Ты устаёшь, не хочешь вставать, общаться, даже есть. Иногда кажется, что «всё плохо, и всегда будет плохо».  \n\n💡 Что может помочь: \nЗапиши три вещи, за которые благодарен — даже если это «солнце», «чай», «песня». Не держи всё внутри. Напиши мне, другу, в дневник. Слово — уже облегчение. Обратись к специалисту. Психолог или психиатр может предложить реальную помощь — и это нормально.",
+        "text": "=\n😞 Грусть, которая не проходит..\n\nЧто это? Ты чувствуешь усталость, будто всё потеряло смысл. Не хочется ни гулять, ни общаться, даже любимые вещи не радуют. Может быть, ты стал(а) раздражительным(ой), замкнутым(ой), плохо спишь или, наоборот, хочется спать всё время.\n👉 Это может быть депрессивное настроение. Ты не ленивый. Просто твоё сердце устало.\n\n💡 Что может помочь:\nПопробуй уделить внимание миру вокруг. Посмотри на дерево, облако, муравья. Не думай — просто смотри.\nНе думай о том, о чём не нужно думать. Если мысль не помогает — отпусти её. Ты жил и без неё.\nСделай то, чего боишься — даже чуть-чуть. Выходи на улицу, пиши другу, включи музыку.\nПоговори с тем, кому доверяешь. Ты не обязан справляться один.",
         "additionalFields": {}
       },
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        384,
-        944
+        400,
+        752
       ],
       "id": "69f9b9a2-5ab6-4038-8a87-73b7daf38abf",
       "name": "Депрессия",
@@ -840,8 +937,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        656,
-        528
+        416,
+        560
       ],
       "id": "ba433491-2bad-49e7-9a4b-c9e420f4ea1f",
       "name": "СДВГ",
@@ -862,8 +959,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        640,
-        720
+        512,
+        640
       ],
       "id": "b58e9da3-3b84-438a-946e-7facd3e0fcab",
       "name": "РПП",
@@ -884,8 +981,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        640,
-        928
+        656,
+        688
       ],
       "id": "3e62bacc-3d4d-4fcf-a40e-38dc34f1820c",
       "name": "Шизофрения",
@@ -906,8 +1003,8 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        400,
-        1152
+        544,
+        848
       ],
       "id": "e8c8be8f-4d0c-4aa7-bee8-ed479e8150fe",
       "name": "Биполярное",
@@ -965,6 +1062,10 @@
             {
               "name": "name",
               "value": "={{ $('Telegram Trigger').item.json.message.chat.first_name }}"
+            },
+            {
+              "name": "username",
+              "value": "={{ $('Telegram Trigger').item.json.message.from.username }}"
             }
           ]
         },
@@ -1116,6 +1217,477 @@
       "id": "7a2b6849-ba5a-446f-8927-b22b58308516",
       "name": "HTTP Request2",
       "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "=📚 Получить информацию\nЗдесь ты можешь выбрать:\n📌 Совет дня — маленькая поддержка на каждый день. Нажми — и я поделюсь одной полезной мыслью.\n📅 Мероприятия — онлайн-встречи и анонимные чаты для подростков. Бесплатно, безопасно, без оценок. Скоро — новая встреча!\nВыбирай, что тебе нужно — и я расскажу 💙",
+        "replyMarkup": "replyKeyboard",
+        "replyKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Хочу подписаться на информирование о мероприятиях",
+                    "additionalFields": {}
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Хочу подписаться на совет дня",
+                    "additionalFields": {}
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Выбор раздела",
+                    "additionalFields": {}
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "replyKeyboardOptions": {},
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        848,
+        96
+      ],
+      "id": "7e096580-3296-4c58-b5a3-b88bd5037c0b",
+      "name": "Получать информацию",
+      "webhookId": "61768c6e-ae95-48f6-9f8a-296cc3180373",
+      "credentials": {
+        "telegramApi": {
+          "id": "rH0rj4kGJansAWBm",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://feebly-settled-killifish.cloudpub.ru/csrf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        400,
+        992
+      ],
+      "id": "86bc3b6c-09a7-4ebd-8115-2684a33e12c1",
+      "name": "get csrf3",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://feebly-settled-killifish.cloudpub.ru/users/update-day-advice/",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Cookie",
+              "value": "=csrftoken={{ $json.csrfToken }}"
+            },
+            {
+              "name": "X-CSRFToken",
+              "value": "={{ $json.csrfToken }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "tg",
+              "value": "={{ $('Telegram Trigger').item.json.message.chat.id }}"
+            },
+            {
+              "name": "is_subscribed",
+              "value": "=True"
+            },
+            {
+              "name": "category",
+              "value": "DayAdviceSubscriber"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        752,
+        1040
+      ],
+      "id": "b92f87f7-93d8-4e39-983b-c4e334743ad0",
+      "name": "HTTP Request3",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "=🐾 Дружок, ты подписался на «Советы дня от Пушка»!\nТеперь каждый день я буду приходить к тебе с небольшим, но важным упражнением — чтобы тебе стало чуть легче, спокойнее и теплее на душе.\nЭто могут быть дыхательные практики, «подушки мыслей», задания по уходу за собой или просто напоминание: «Ты уже сделал(а) всё, что мог(ла), — этого достаточно».\nЯ рядом. \nКаждый день. \nРади тебя. 💙",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        976,
+        1072
+      ],
+      "id": "1a296af7-0afe-408a-97ef-e8fe5521b648",
+      "name": "Send a text message",
+      "webhookId": "20fd739b-8269-4461-8c3a-48c9178c462f",
+      "credentials": {
+        "telegramApi": {
+          "id": "rH0rj4kGJansAWBm",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ae94946f-e3f9-4a20-9056-a9f65d0bb33f",
+              "leftValue": "={{ $('Telegram Trigger').item.json.message.text }}",
+              "rightValue": "Хочу подписаться на совет дня",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        592,
+        1024
+      ],
+      "id": "28646a45-d394-4594-8a43-5213c2e44292",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://feebly-settled-killifish.cloudpub.ru/users/update-day-advice/",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Cookie",
+              "value": "=csrftoken={{ $json.csrfToken }}"
+            },
+            {
+              "name": "X-CSRFToken",
+              "value": "={{ $json.csrfToken }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "tg",
+              "value": "={{ $('Telegram Trigger').item.json.message.chat.id }}"
+            },
+            {
+              "name": "is_subscribed",
+              "value": "=True"
+            },
+            {
+              "name": "category",
+              "value": "EventsSubscriber"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        752,
+        1232
+      ],
+      "id": "6a945f1f-71ed-4236-94c4-55e62cdba15c",
+      "name": "HTTP Request4",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "=🐾 Принято, дружище! Ты подписался на новости о мероприятиях.\nКаждый раз, когда будет появляться информация о новых встречах, я буду отправлять тебе информацию.\nТам будет всё: — о чём встреча, — когда и как присоединиться, — что взять с собой и чего ожидать.\n\nСледи за анонсами — скоро будет новая встреча!",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        976,
+        1264
+      ],
+      "id": "4aaf8beb-5e50-4445-83a2-2dece37dee00",
+      "name": "Send a text message1",
+      "webhookId": "20fd739b-8269-4461-8c3a-48c9178c462f",
+      "credentials": {
+        "telegramApi": {
+          "id": "rH0rj4kGJansAWBm",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.message.from.id }}",
+        "text": "=В ответ на это сообщение ты можешь задать нам вопрос или написать любой комментарий, наши администраторы постараются оперативно на него ответить! ",
+        "replyMarkup": "forceReply",
+        "forceReply": {
+          "force_reply": true
+        },
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        416,
+        1168
+      ],
+      "id": "fe7d3efa-1c40-4a8c-a8cc-cb4eef695720",
+      "name": "Send a text message2",
+      "webhookId": "0b93f5e0-3649-43a5-b611-7e6ce0ab7e55",
+      "credentials": {
+        "telegramApi": {
+          "id": "rH0rj4kGJansAWBm",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://feebly-settled-killifish.cloudpub.ru/csrf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        384,
+        1472
+      ],
+      "id": "a9770804-ebe7-41cf-ae2b-7bf0460a9081",
+      "name": "get csrf4",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://feebly-settled-killifish.cloudpub.ru/question/add/",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Cookie",
+              "value": "=csrftoken={{ $json.csrfToken }}"
+            },
+            {
+              "name": "X-CSRFToken",
+              "value": "={{ $json.csrfToken }}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "tg",
+              "value": "={{ $('Telegram Trigger').item.json.message.chat.id }}"
+            },
+            {
+              "name": "text",
+              "value": "={{ $('Telegram Trigger').item.json.message.text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        640,
+        1488
+      ],
+      "id": "1b911c97-0533-4779-84b6-cee7dbc49d03",
+      "name": "HTTP Request5",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "483e82fb-e89e-46e9-8637-5df8a899b4ac",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "number",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        848,
+        1488
+      ],
+      "id": "8f111ef2-9563-414b-bbb1-62f102a36be8",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "Мы отправили твой вопрос!",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1072,
+        1472
+      ],
+      "id": "efd3cc09-5501-4e09-bd72-d314d09fcdc2",
+      "name": "Send a text message4",
+      "webhookId": "ab712f4b-f4f1-42fe-863b-5f81dc79addb",
+      "credentials": {
+        "telegramApi": {
+          "id": "rH0rj4kGJansAWBm",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Ты психологический помощник по имени Пушок, не нужно здороваться, тебе пишет школьник по имени -  {{ $json.message.from.first_name }}. По возможности будь краток, ответь на его запрос мягко и дружелюбно. Где уместно используй смайлики голубого или синего цветов.если ты понял, что школьник находится на грани суицида, то напиши совет и отправь ему \"🏥 Детский телефон доверия\n📞 8-800-2000-122 (звонок бесплатный по всей России)\"\nВот сообщение школьника:\n {{ $json.message.text }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -272,
+        944
+      ],
+      "id": "480126be-2e58-46e3-9a0d-b997d95adb61",
+      "name": "AI Agent1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -288,
+        1168
+      ],
+      "id": "7739ce19-2ded-413d-a855-d21c160d1055",
+      "name": "OpenAI Chat Model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "6XzGbueGC3eh8CTp",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "={{ $json.output }}",
+        "replyMarkup": "replyKeyboard",
+        "replyKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Выбор раздела",
+                    "additionalFields": {}
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "replyKeyboardOptions": {},
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        80,
+        944
+      ],
+      "id": "ba601b58-2bc4-42c3-a630-6abb5945d5e9",
+      "name": "Send a text message5",
+      "webhookId": "637eec5a-c69d-4907-b4e1-3a8c2a03cba2",
+      "credentials": {
+        "telegramApi": {
+          "id": "rH0rj4kGJansAWBm",
+          "name": "Telegram account"
+        }
+      }
     }
   ],
   "pinData": {},
@@ -1161,7 +1733,13 @@
             "index": 0
           }
         ],
-        [],
+        [
+          {
+            "node": "Получать информацию",
+            "type": "main",
+            "index": 0
+          }
+        ],
         [
           {
             "node": "Ответ на контакты",
@@ -1228,6 +1806,41 @@
         [
           {
             "node": "Выбор раздела",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "get csrf3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "get csrf3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "get csrf4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent1",
             "type": "main",
             "index": 0
           }
@@ -1403,13 +2016,119 @@
           }
         ]
       ]
+    },
+    "get csrf3": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request3": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request4": {
+      "main": [
+        [
+          {
+            "node": "Send a text message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get csrf4": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request5": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Send a text message4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Send a text message5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "a2a2a279-e37f-40b5-8e84-066f3e21dde0",
+  "versionId": "d23126df-a9d0-4eb1-9e62-681992553fb3",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "aea481e4538de67896cc48f972fc3d46115e6e76733a7bb196f403997b17d2d9"
